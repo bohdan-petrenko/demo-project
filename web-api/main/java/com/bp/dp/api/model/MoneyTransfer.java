@@ -1,5 +1,6 @@
 package com.bp.dp.api.model;
 
+import java.time.LocalDateTime;
 import java.util.Currency;
 
 public record MoneyTransfer(
@@ -8,6 +9,7 @@ public record MoneyTransfer(
 		String accountToId,
 		Currency currency,
 		long amount,
-		String description
+		String description,
+		LocalDateTime completedAtGmt
 ) {
 }
