@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.bp</groupId>
-		<artifactId>demo-project</artifactId>
+		<artifactId>simple-bank</artifactId>
 		<version>0.0.1</version>
 	</parent>
 
 	<artifactId>web-api</artifactId>
-	<name>Web Controllers to expose REST API</name>
+	<name>Web Controllers to expose REST API of simple bank</name>
 
 	<dependencies>
 		<dependency>
