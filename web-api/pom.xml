@@ -10,10 +10,6 @@
 	<artifactId>web-api</artifactId>
 	<name>Web Controllers to expose REST API</name>
 
-	<properties>
-		<spring.boot.mainclass>com.bp.dp.DemoProjectApplication</spring.boot.mainclass>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -52,9 +48,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>${spring.boot.mainclass}</mainClass>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

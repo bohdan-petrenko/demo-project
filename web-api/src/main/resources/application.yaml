@@ -1,0 +1,11 @@
+spring:
+  application.name: web-api
+  profiles.active: dev
+  threads.virtual.enabled: true
+
+mongodb:
+  host: mongodb-local
+  port: 27017
+  databaseName: simpleBank
+  userName: simpleBankRootUser
+  password: simpleBankSecretPassword

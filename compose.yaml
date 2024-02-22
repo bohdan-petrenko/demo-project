@@ -1,9 +1,37 @@
+#todo check how to use variables
 services:
-  mongodb:
-    image: 'mongo:latest'
-    environment:
-      - 'MONGO_INITDB_DATABASE=mydatabase'
-      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
-      - 'MONGO_INITDB_ROOT_USERNAME=root'
+  simple-bank-web-api:
+    image: web-api:0.0.1
+    build:
+      context: ./web-api
+      dockerfile: Dockerfile
+    #todo check how to configure network instead of links
+    links:
+      - mongodb-local
+    depends_on:
+      mongodb-local:
+        condition: service_healthy
     ports:
+      - "8181:8181"
+    environment:
+      - SERVER_PORT= 8181
+  mongodb-local:
+    image: 'mongo:latest'
+    container_name: mongodb-local
+    environment:
+      - 'MONGO_INITDB_DATABASE=simpleBank'
+      - 'MONGO_INITDB_ROOT_PASSWORD=simpleBankSecretPassword'
+      - 'MONGO_INITDB_ROOT_USERNAME=simpleBankRootUser'
+    #todo learn
+    ports:
+      - '27017:27017'
+    #todo learn
+    expose:
       - '27017'
+    #todo learn
+    healthcheck:
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongosh admin -u simpleBankRootUser -p simpleBankSecretPassword --quiet | grep 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
