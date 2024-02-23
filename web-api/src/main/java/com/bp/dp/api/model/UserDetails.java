@@ -1,11 +1,19 @@
 package com.bp.dp.api.model;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public record UserDetails(
-		long id,
+		String id,
+		String email,
+		String phoneNumber,
 		String firstName,
 		String lastName,
-		LocalDate dateOfBirth
+		@JsonIgnore
+		String passwordHash,
+		LocalDate dateOfBirth,
+		List<UserBankAccount> accounts
 		) {
 }
