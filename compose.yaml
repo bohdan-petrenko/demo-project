@@ -1,4 +1,6 @@
 #todo check how to use variables
+#todo add volume for mongo to not to lost data from previous runs
+#todo investigate how to run only your app from idea to  not restart all containers every time
 services:
   simple-bank-web-api:
     image: web-api:0.0.1
