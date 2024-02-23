@@ -1,6 +1,5 @@
 package com.bp.dp.document;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
@@ -20,6 +19,7 @@ public class UserDocument {
 	private String firstName;
 	private String lastName;
 	private long dateOfBirthMillisUtc;
-	private String passwordHash;
+	private String passwordEncrypted;
 	private List<AccountNestedDocument> accounts;
+	private List<String> authorities;
 }
