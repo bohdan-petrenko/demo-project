@@ -1,6 +1,9 @@
 package com.bp.dp.api;
 
 import com.bp.dp.api.model.UserDetails;
+import com.bp.dp.api.model.specific.SignUpRequest;
+import com.bp.dp.service.UserService;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,11 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("user")
+@RequiredArgsConstructor
 public class UserController {
+	private final UserService userService;
 
-	@PostMapping("sign-in")
-	public void signIn(@RequestBody Object userData) {
-
+	@PostMapping("sign-up")
+	public void signUp(@RequestBody SignUpRequest signUpRequest) {
+		userService.registerNewUser(signUpRequest);
 	}
 
 	@PostMapping("log-in")
