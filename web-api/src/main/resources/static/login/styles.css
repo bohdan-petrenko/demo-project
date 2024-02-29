@@ -1,0 +1,14 @@
+@include media-breakpoint-up(sm) { ... }
+@include media-breakpoint-up(md) { ... }
+@include media-breakpoint-up(lg) { ... }
+@include media-breakpoint-up(xl) { ... }
+
+.login-form-container {
+	margin-top: 32px;
+	border: solid 1px rgb(192, 192,192);
+	border-radius: 5px 10px;
+}
+
+.login-form-container .form-group {
+	padding: 8px 0px;
+}
