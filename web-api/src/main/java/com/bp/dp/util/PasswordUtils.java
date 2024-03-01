@@ -3,7 +3,6 @@ package com.bp.dp.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.bp.dp.exception.MobilePhoneNumberInvalidException;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

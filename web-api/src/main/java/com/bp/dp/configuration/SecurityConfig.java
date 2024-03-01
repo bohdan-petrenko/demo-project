@@ -23,29 +23,32 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)//todo check values
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final MongoDbUserDetailService userDetailsService;
+	private final MongoDbUserDetailService userDetailsService;
 
-    @Bean
-    public AuthenticationManager customAuthenticationManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userDetailsService)
-            .passwordEncoder(bCryptPasswordEncoder());
-        return authenticationManagerBuilder.build();
-    }
+	@Bean
+	public AuthenticationManager customAuthenticationManager(HttpSecurity http) throws Exception {
+		AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+		authenticationManagerBuilder.userDetailsService(userDetailsService)
+				.passwordEncoder(bCryptPasswordEncoder());
+		return authenticationManagerBuilder.build();
+	}
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(withDefaults())
-            .httpBasic(withDefaults())
-            .formLogin(withDefaults())
-            .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.anyRequest().permitAll())
-            .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        return http.build();
-    }
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf(AbstractHttpConfigurer::disable)
+				.headers(withDefaults())
+				.authorizeHttpRequests(authorizeHttpRequests ->
+						authorizeHttpRequests
+								.requestMatchers("/user/log-in").permitAll())
+				.httpBasic(withDefaults())
+				.formLogin(withDefaults())
+				.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry.anyRequest().permitAll())
+				.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		return http.build();
+	}
 }
